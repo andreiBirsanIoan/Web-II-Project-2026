@@ -1,35 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Bîrsan Ioan-Andrei – Portofoliu</title> 
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <header>
-            <nav>
-                <ul>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="projects.html">Projects</a></li>
-                </ul>
-            </nav>
-        </header>
-        <main>
-            <section>
-                <article>
-                    <h2>Article Title</h2>
-                    <p>Article content...</p>
-                </article>
-            </section>
-            <aside>
-                <h3>Sidebar Content</h3>
-            </aside>
-        </main>
-        <footer>
-            <p>© 2026 Birsan Ioan-Andrei</p>
-        </footer>
-        <script scr="script.js"></script>
-    </body>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bîrsan Ioan-Andrei – Portofoliu</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- 1. Header & Navigatie -->
+    <header>
+        <nav>
+            <ul id="nav-list">
+                <li><a href="Index.html" class="active-page">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <!-- Butonul hamburger pentru mobil -->
+            <button id="navToggle" class="hamburger">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- 2. Secțiunea Principală (Hero) -->
+    <main>
+        <section class="hero">
+            
+            <h1>Salut, sunt <span class="highlight">Bîrsan Ioan-Andrei</span></h1>
+            <span class="hero-tag"> Computer Engineering Student</span>
+            <p class="hero-desc">
+                Student la Inginerie Calculatoare (ULBS), pasionat de sisteme embedded, dezvoltare web și proiectarea aplicatiilor software.
+            </p>
+            
+            <!-- Butoane mari de navigare directă -->
+            <div class="hero-buttons">
+                <a href="projects.html" class="btn btn-primary">Vezi Proiectele</a>
+                <a href="contact.html" class="btn btn-secondary">Contactează-mă</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- 3. Footer lipit jos -->
+    <footer>
+        <p>© 2026 Bîrsan Ioan-Andrei</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
 </html>

@@ -1,0 +1,291 @@
+/* ==========================================
+   1. RESET BAZĂ & STILURI GLOBALE
+   ========================================== */
+
+
+html, body {
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0f0f0f;
+    color: #e0e0e0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+/* ==========================================
+   2. HEADER & BARĂ DE NAVIGARE
+   ========================================== */
+header {
+    background: #1a1a1a;
+    border-bottom: 1px solid #2a2a2a;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#nav-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    gap: 1.5rem;
+}
+
+#nav-list a {
+    color: #e0e0e0;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+#nav-list a:hover,
+#nav-list a.active {
+    color: #6ee7b7;
+    background: rgba(110, 231, 183, 0.1);
+}
+
+/* ==========================================
+   3. PRIMA PAGINĂ (HERO SECTION - INDEX.HTML)
+   ========================================== */
+.hero {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+    text-align: center;
+}
+
+.hero-tag {
+    display: inline-block;
+    color: #6ee7b7;
+    font-family: monospace;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+.hero h1 {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    color: #ffffff;
+}
+
+.highlight {
+    color: #6ee7b7;
+}
+
+.hero-desc {
+    font-size: 1.15rem;
+    color: #aaa;
+    max-width: 650px;
+    margin: 0 auto 2rem auto;
+    line-height: 1.6;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background-color: #6ee7b7;
+    color: #0f0f0f;
+}
+
+.btn-primary:hover {
+    background-color: #4dd4a0;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: #e0e0e0;
+    border: 1px solid #444;
+}
+
+.btn-secondary:hover {
+    border-color: #6ee7b7;
+    color: #6ee7b7;
+    transform: translateY(-2px);
+}
+@media (max-width: 768px) {
+  #nav-list {
+    display: none; /* Ascuns pe mobil */
+    flex-direction: column;
+    width: 100%;
+  }
+
+  #nav-list.active {
+    display: flex; /* Apare când JS îi dă toggle la 'active' */
+  }
+}
+.active-page {
+    border-bottom: 5px solid #6ee7b7;
+  
+}
+#projects-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem 0;
+}
+
+.project-card {
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.project-card h3 {
+  color: #6ee7b7;
+  margin-top: 0;
+}
+
+.project-card a {
+  color: #6ee7b7;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+/* ==========================================
+   4. PAGINA DESPRE MINE / EDUCAȚIE (ABOUT.HTML)
+   ========================================== */
+.section {
+    padding: 3rem 1.5rem;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.section-title {
+    font-size: 2.2rem;
+    color: #ffffff;
+}
+
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.timeline-card {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 10px;
+    padding: 1.5rem;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.timeline-card:hover {
+    border-color: #6ee7b7;
+    transform: translateY(-2px);
+}
+
+.tl-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.tl-period {
+    font-size: 0.85rem;
+    color: #888888;
+}
+
+.tl-badge{
+    padding:0.3rem;
+    border-radius:0.8rem;
+}
+
+.tl-badge-green { background: rgba(110, 231, 183, 0.15); color: #6ee7b7; }
+.tl-badge-blue  { background: rgba(129, 140, 248, 0.15); color: #818cf8; }
+.tl-badge-amber { background: rgba(251, 191, 36, 0.15);  color: #fbbf24; }
+
+.timeline-card h3 {
+    color: #ffffff;
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.tl-org {
+    color: #6ee7b7;
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+}
+
+.tl-desc {
+    color: #aaa;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* ==========================================
+   5. FOOTER (FIXAT JOS)
+   ========================================== */
+footer {
+    background-color: #1a1a1a;
+    border-top: 1px solid #2a2a2a;
+    padding: 1.5rem;
+    text-align: center;
+    color: #888;
+    font-size: 0.85rem;
+}
+#contact-form{
+    background-color: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    padding:2rem;
+    gap: 0.5rem;
+    margin:0 auto;
+    display:flex;
+    flex-direction: column;
+    max-width:20%;
+    border-radius:30px;
+}
+#contact-form:hover{
+    border-color:#4dd4a0;
+    transition: 0.7s ease;
+}
+#contact-title{
+    text-align: center;
+}
