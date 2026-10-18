@@ -25,9 +25,9 @@ main {
 header {
     background: #1a1a1a;
     border-bottom: 1px solid #2a2a2a;
-    position:fixed;
+    position: fixed;
     justify-items: center;
-    width:100%;
+    width: 100%;
     top: 0;
     z-index: 100;
 }
@@ -70,12 +70,9 @@ nav {
     border-bottom: 3px solid #6ee7b7;
 }
 
-/* Buton Hamburger (Ascuns implicit pe Desktop) */
+/* Ascuns complet pe Desktop (ecrane mari) */
 .hamburger {
     display: none;
-    background: transparent;
-    border: none;
-    cursor: pointer;
 }
 
 /* ==========================================
@@ -236,6 +233,33 @@ nav {
 /* ==========================================
    5. PAGINA PROIECTE (PROJECTS.HTML)
    ========================================== */
+.search-container {
+    max-width: 400px;
+    margin: 1.5rem auto;
+}
+
+#project-search {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    color: #e0e0e0;
+    box-sizing: border-box;
+}
+
+#project-search:focus {
+    outline: none;
+    border-color: #6ee7b7;
+}
+
+#projects-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 320px));
+    gap: 1.5rem;
+    justify-content: center;
+    padding: 2rem 0;
+}
 
 .project-card {
     background-color: #1a1a1a;
@@ -245,6 +269,7 @@ nav {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    box-sizing: border-box;
 }
 
 .project-card h3 {
@@ -286,50 +311,27 @@ nav {
 #contact-form:hover {
     border-color: #4dd4a0;
 }
-/* Restricționăm lățimea căsuței de căutare */
-.search-container {
-    max-width: 400px;
-    margin: 1.5rem auto;
-}
 
-#project-search {
-    width: 100%;
-    padding: 0.75rem 1rem;
+/* ==========================================
+   7. FOOTER (FIXAT JOS)
+   ========================================== */
+footer {
     background-color: #1a1a1a;
-    border: 1px solid #333;
-    border-radius: 8px;
-    color: #e0e0e0;
-    box-sizing: border-box;
-}
-
-#project-search:focus {
-    outline: none;
-    border-color: #6ee7b7;
-}
-
-/* Grila de proiecte */
-#projects-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 320px)); /* Setează dimensiunea fixă a cardului între 280px și 320px */
-    gap: 1.5rem;
-    justify-content: center; /* Centrează cardurile pe ecran */
-    padding: 2rem 0;
-}
-
-.project-card {
-    background-color: #1a1a1a;
-    border: 1px solid #333;
-    border-radius: 8px;
+    border-top: 1px solid #2a2a2a;
     padding: 1.5rem;
-    display: flex; /* IMPORTANT: Flexbox în interiorul cardului */
-    flex-direction: column;
-    justify-content: space-between;
-    box-sizing: border-box;
+    text-align: center;
+    color: #888;
+    font-size: 0.85rem;
 }
-    /* Butonul Hamburger */
+
+/* ==========================================
+   8. MEDIA QUERIES (RESPONSIVE MOBIL - SUB 768px)
+   ========================================== */
+@media (max-width: 768px) {
+    /* Butonul Hamburger APARE DOAR PE MOBIL */
     .hamburger {
-        display:flex;
-        flex-direction:column;
+        display: flex;
+        flex-direction: column;
         justify-content: space-between;
         width: 30px;
         height: 21px;
@@ -348,22 +350,6 @@ nav {
         transition: all 0.3s ease;
     }
 
-/* ==========================================
-   7. FOOTER (FIXAT JOS)
-   ========================================== */
-footer {
-    background-color: #1a1a1a;
-    border-top: 1px solid #2a2a2a;
-    padding: 1.5rem;
-    text-align: center;
-    color: #888;
-    font-size: 0.85rem;
-}
-
-/* ==========================================
-   8. MEDIA QUERIES (RESPONSIVE MOBIL)
-   ========================================== */
-@media (max-width: 768px) {
     /* Meniul Mobil */
     #nav-list {
         display: none;
@@ -377,7 +363,7 @@ footer {
     }
 
     .search-container {
-  max-width: 500px;
-  margin: 0 auto 2rem auto;
-}
+        max-width: 90%;
+        margin: 0 auto 1.5rem auto;
+    }
 }
