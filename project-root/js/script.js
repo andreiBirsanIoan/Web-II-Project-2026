@@ -70,12 +70,35 @@ async function fetchGithubRepos() {
         container.appendChild(card);
       }
     });
+    initLiveSearch();
   } catch (error) {
     console.error("Eroare la preluarea proiectelor:", error);
     container.innerHTML = "<p>Nu s-au putut încărca proiectele.</p>";
   }
 }
+// Funcție care activează căutarea live
+function initLiveSearch() {
+  const searchInput = document.getElementById("project-search");
 
+  if (!searchInput) return;
+
+  searchInput.addEventListener("input", function () {
+    const filterText = this.value.toLowerCase().trim(); // Ce a scris utilizatorul în căsuță
+    const projectCards = document.querySelectorAll(".project-card");
+
+    projectCards.forEach((card) => {
+      // Preluăm titlul proiectului din h3
+      const projectName = card.querySelector("h3").textContent.toLowerCase();
+
+      // Dacă titlul conține literele introduse, afișăm cardul, altfel îl ascundem
+      if (projectName.includes(filterText)) {
+        card.style.display = "flex";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  });
+}
 // Apelăm funcția când se încarcă pagina
 document.addEventListener("DOMContentLoaded", () => {
   initMobileMenu(); // Pornim meniul pe orice pagină
