@@ -4,12 +4,15 @@ const inputEmail = document.getElementById("emailPerson");
 
 function initMobileMenu() {
   const hamburger = document.querySelector(".hamburger");
-  const navMenu = document.querySelector(".nav-menu");
+  const navMenu = document.querySelector("#nav-list");
 
-  hamburger.addEventListener("click", function () {
-    hamburger.classList.toggle("active");
-    navMenu.classList.toggle("active");
-  });
+  // Verificăm dacă ambele elemente există în pagină
+  if (hamburger && navMenu) {
+    hamburger.addEventListener("click", function () {
+      hamburger.classList.toggle("active");
+      navMenu.classList.toggle("active");
+    });
+  }
 }
 function validateField(field, fieldName) {
   const value = field.value.trim();
@@ -74,4 +77,7 @@ async function fetchGithubRepos() {
 }
 
 // Apelăm funcția când se încarcă pagina
-fetchGithubRepos();
+document.addEventListener("DOMContentLoaded", () => {
+  initMobileMenu(); // Pornim meniul pe orice pagină
+  fetchGithubRepos(); // Va rula doar pe projects.html
+});
