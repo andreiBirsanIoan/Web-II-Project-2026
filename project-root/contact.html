@@ -29,7 +29,13 @@
                     <input id="namePerson" type="text" name="name" required placeholder="someone" maxlength="50" > 
                     <label for="email">Email adress:</label>
                     <input id="emailPerson" type="email" name="email" required placeholder="someone@email.com">
-                    <textarea placeholder="Scrie mesajul tău aici..."></textarea>
+                    <!-- Câmp opțional pentru telefon -->
+    <label for="phonePerson">Număr de telefon (Opțional)</label>
+    <input type="tel" id="phonePerson" placeholder="0712345678">
+
+    <!-- Mesaj cu restricție de lungime -->
+    <label for="messagePerson">Mesaj * (între 10 și 1000 caractere)</label>
+    <textarea id="messagePerson" rows="5" required minlength="10" maxlength="1000" placeholder="Scrie mesajul tău aici..."></textarea>
                     <button type="submit" id="send-button">SEND</button>
                 </form>
             </section>

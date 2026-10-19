@@ -1,7 +1,8 @@
 const sendForm = document.getElementById("contact-form");
 const inputName = document.getElementById("namePerson");
 const inputEmail = document.getElementById("emailPerson");
-
+const inputPhone = document.getElementById("phonePerson");
+const inputMessage = document.getElementById("messagePerson");
 // Păstrăm limbajul selectat curent (implicit 'all')
 let currentLanguageFilter = "all";
 
@@ -26,6 +27,17 @@ function validateField(field, fieldName) {
       return emailRegex.test(value);
     case "name":
       return value.length >= 2;
+    case "phone":
+      // Dacă nu este completat, este valid (fiind opțional)
+      if (value === "") return true;
+      // Validare simplă de format telefon (cifre, spații, plus, cratimă)
+      const phoneRegex =
+        /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
+      return phoneRegex.test(value);
+
+    case "message":
+      // Verificăm dacă mesajul are între 10 și 1000 de caractere
+      return value.length >= 10 && value.length <= 1000;
     default:
       return true;
   }
@@ -37,8 +49,9 @@ if (sendForm) {
 
     const emailValid = validateField(inputEmail, "email");
     const nameValid = validateField(inputName, "name");
-
-    if (emailValid && nameValid) {
+    const phoneValid = validateField(inputPhone, "phone");
+    const messageValid = validateField(inputMessage, "message");
+    if (nameValid && emailValid && phoneValid && messageValid) {
       alert("Mesajul a fost trimis cu succes!");
     } else {
       alert("Datele introduse nu sunt valide!");
