@@ -2,11 +2,13 @@ const sendForm = document.getElementById("contact-form");
 const inputName = document.getElementById("namePerson");
 const inputEmail = document.getElementById("emailPerson");
 
+// Păstrăm limbajul selectat curent (implicit 'all')
+let currentLanguageFilter = "all";
+
 function initMobileMenu() {
   const hamburger = document.querySelector(".hamburger");
   const navMenu = document.querySelector("#nav-list");
 
-  // Verificăm dacă ambele elemente există în pagină
   if (hamburger && navMenu) {
     hamburger.addEventListener("click", function () {
       hamburger.classList.toggle("active");
@@ -14,7 +16,9 @@ function initMobileMenu() {
     });
   }
 }
+
 function validateField(field, fieldName) {
+  if (!field) return false;
   const value = field.value.trim();
   switch (fieldName) {
     case "email":
@@ -26,11 +30,11 @@ function validateField(field, fieldName) {
       return true;
   }
 }
+
 if (sendForm) {
   sendForm.addEventListener("submit", (e) => {
-    e.preventDefault(); // Oprește reîncărcarea paginii
+    e.preventDefault();
 
-    // Trimiți direct elementele HTML și numele câmpului
     const emailValid = validateField(inputEmail, "email");
     const nameValid = validateField(inputName, "name");
 
@@ -41,9 +45,10 @@ if (sendForm) {
     }
   });
 }
+
 async function fetchGithubRepos() {
   const container = document.getElementById("projects-container");
-  if (!container) return; // Rulăm doar dacă suntem pe projects.html
+  if (!container) return; // Rulăm doar pe projects.html
 
   try {
     const response = await fetch(
@@ -51,56 +56,116 @@ async function fetchGithubRepos() {
     );
     const repos = await response.json();
 
-    container.innerHTML = ""; // Ștergem mesajul de încărcare
+    const filteredRepos = repos.filter((repo) => !repo.fork);
+    container.innerHTML = "";
 
-    repos.forEach((repo) => {
-      if (!repo.fork) {
-        // Păstrăm doar proiectele create de tine
-        const card = document.createElement("div");
-        card.className = "project-card";
-        card.innerHTML = `
-          <h3>${repo.name}</h3>
-          <p>${repo.description || "Fără descriere disponibilă."}</p>
-          <div class="repo-info">
-            
-            <span>${repo.language || "HTML/CSS"}</span>
-          </div>
-          <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">Vezi pe GitHub</a>
-        `;
-        container.appendChild(card);
-      }
+    // 1. Generăm butoanele de limbaje disponibile
+    setupLanguageFilters(filteredRepos);
+
+    // 2. Randăm cardurile cu atributul data-language și efect de delay la animație
+    filteredRepos.forEach((repo, index) => {
+      const card = document.createElement("div");
+      card.className = "project-card";
+
+      // Salvăm limbajul într-un atribut de date pentru filtrare
+      card.dataset.language = repo.language
+        ? repo.language.toLowerCase()
+        : "fără limbaj";
+
+      // Decalaj scurt de timp pentru animație (stagger effect)
+      card.style.animationDelay = `${index * 0.08}s`;
+
+      card.innerHTML = `
+        <h3>${repo.name}</h3>
+        <p>${repo.description || "Fără descriere disponibilă."}</p>
+        <div class="repo-info">
+          <span>🔤 ${repo.language || "Nespecificat"}</span>
+          <span>⭐ ${repo.stargazers_count}</span>
+        </div>
+        <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">Vezi pe GitHub →</a>
+      `;
+      container.appendChild(card);
     });
-    initLiveSearch();
+
+    // 3. Pornim ascultătorii de evenimente pentru căutare și filtrare
+    initSearchAndFilter();
   } catch (error) {
     console.error("Eroare la preluarea proiectelor:", error);
     container.innerHTML = "<p>Nu s-au putut încărca proiectele.</p>";
   }
 }
-// Funcție care activează căutarea live
-function initLiveSearch() {
+
+function setupLanguageFilters(repos) {
+  const filterContainer = document.getElementById("language-filters");
+  if (!filterContainer) return;
+
+  // Extragerea limbajelor unice
+  const languages = new Set();
+  repos.forEach((repo) => {
+    if (repo.language) languages.add(repo.language);
+  });
+
+  filterContainer.innerHTML = `<button class="filter-btn active" data-lang="all">Toate</button>`;
+
+  languages.forEach((lang) => {
+    const btn = document.createElement("button");
+    btn.className = "filter-btn";
+    btn.dataset.lang = lang.toLowerCase();
+    btn.textContent = lang;
+    filterContainer.appendChild(btn);
+  });
+}
+
+function initSearchAndFilter() {
   const searchInput = document.getElementById("project-search");
+  const filterButtons = document.querySelectorAll(".filter-btn");
 
-  if (!searchInput) return;
-
-  searchInput.addEventListener("input", function () {
-    const filterText = this.value.toLowerCase().trim(); // Ce a scris utilizatorul în căsuță
+  // Funcție centrală de filtrare combinată
+  function filterProjects() {
+    const searchText = searchInput
+      ? searchInput.value.toLowerCase().trim()
+      : "";
     const projectCards = document.querySelectorAll(".project-card");
 
     projectCards.forEach((card) => {
-      // Preluăm titlul proiectului din h3
       const projectName = card.querySelector("h3").textContent.toLowerCase();
+      const cardLang = card.dataset.language;
 
-      // Dacă titlul conține literele introduse, afișăm cardul, altfel îl ascundem
-      if (projectName.includes(filterText)) {
+      const matchesSearch = projectName.includes(searchText);
+      const matchesLang =
+        currentLanguageFilter === "all" || cardLang === currentLanguageFilter;
+
+      if (matchesSearch && matchesLang) {
         card.style.display = "flex";
+        // Reinițializăm animația pentru reafișare lină
+        card.style.animation = "none";
+        card.offsetHeight; // Trigger reflow
+        card.style.animation = "fadeInUp 0.3s ease forwards";
       } else {
         card.style.display = "none";
       }
     });
+  }
+
+  // Căutare la fiecare literă tastată
+  if (searchInput) {
+    searchInput.addEventListener("input", filterProjects);
+  }
+
+  // Click pe butoanele de limbaje
+  filterButtons.forEach((btn) => {
+    btn.addEventListener("click", function () {
+      filterButtons.forEach((b) => b.classList.remove("active"));
+      this.classList.add("active");
+
+      currentLanguageFilter = this.dataset.lang;
+      filterProjects();
+    });
   });
 }
-// Apelăm funcția când se încarcă pagina
+
+// Apelăm funcția când se încarcă DOM-ul
 document.addEventListener("DOMContentLoaded", () => {
-  initMobileMenu(); // Pornim meniul pe orice pagină
-  fetchGithubRepos(); // Va rula doar pe projects.html
+  initMobileMenu();
+  fetchGithubRepos();
 });

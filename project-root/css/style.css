@@ -17,6 +17,21 @@ body {
 
 main {
     flex: 1;
+    padding-top: 4rem; /* Spațiu pentru header-ul fixat */
+}
+
+/* ==========================================
+   ANIMAȚIE DE INTRARE CARDURI
+   ========================================== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* ==========================================
@@ -233,6 +248,35 @@ nav {
 /* ==========================================
    5. PAGINA PROIECTE (PROJECTS.HTML)
    ========================================== */
+
+/* Container & Butoane Filtre Limbaje */
+.language-filters {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.filter-btn {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    color: #e0e0e0;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background-color: #6ee7b7;
+    color: #0f0f0f;
+    border-color: #6ee7b7;
+    font-weight: 600;
+}
+
 .search-container {
     max-width: 400px;
     margin: 1.5rem auto;
@@ -270,11 +314,22 @@ nav {
     flex-direction: column;
     justify-content: space-between;
     box-sizing: border-box;
+    
+    /* Animație la încărcare */
+    animation: fadeInUp 0.4s ease forwards;
 }
 
 .project-card h3 {
     color: #6ee7b7;
     margin-top: 0;
+}
+
+.repo-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-top: 1rem;
 }
 
 .project-card a {

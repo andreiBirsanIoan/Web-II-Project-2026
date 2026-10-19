@@ -1,45 +1,53 @@
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Bîrsan Ioan-Andrei – Portofoliu</title> 
-        <link rel="stylesheet" href="css/style.css">
-    </head>
-    <body>
-        <header>
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bîrsan Ioan-Andrei – Portofoliu</title> 
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <button class="hamburger" aria-label="Toggle navigation">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <ul id="nav-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html" class="active-page">Projects</a></li>
+            </ul>
+        </nav>
+    </header>
 
-            <nav>
-                 <button class="hamburger" aria-label="Toggle navigation">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-                </button>
-                <ul id="nav-list">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="projects.html" class="active-page">Projects</a></li>
-                </ul>
-            </nav>
-        </header>
-        <main>
-  <section class="projects-section">
-    <h2>Proiectele Mele GitHub</h2>
-    <div class="search-container">
-  <input type="text" id="project-search" placeholder="Caută un proiect după nume...">
-</div>
+    <main>
+        <section class="projects-section container">
+            <h2>Proiectele Mele GitHub</h2>
 
-<div id="projects-container" class="projects-grid">
-  <p class="loading-text">Se încarcă proiectele...</p>
-</div>
-    <div id="projects-container">
-     
-    </div>
-  </section>
-        </main>
-        <footer>
-            <p>© 2026 Birsan Ioan-Andrei</p>
-        </footer>
-        <script src="js/script.js"></script>
-    </body>
+            <!-- Container pentru butoanele de filtrare după limbaje -->
+            <div id="language-filters" class="language-filters">
+                <button class="filter-btn active" data-lang="all">Toate</button>
+            </div>
+
+            <!-- Input Căutare Live -->
+            <div class="search-container">
+                <input type="text" id="project-search" placeholder="Caută un proiect după nume...">
+            </div>
+
+            <!-- Grila de proiecte (se completează dinamic din JS) -->
+            <div id="projects-container" class="projects-grid">
+                <p class="loading-text">Se încarcă proiectele...</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 Bîrsan Ioan-Andrei</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
 </html>
